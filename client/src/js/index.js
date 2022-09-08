@@ -1,6 +1,6 @@
 import './form';
 import './submit';
-import './database';
+import {initDb, getDb, postDb} from './database';
 
 import '../css/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,4 +18,8 @@ window.addEventListener('load', function() {
 
     // needs to go after the image declarations or the images dont load
     initDb();
+
+    getDb();
+    postDb('Lernantino', 'lernantino@test.com', 8186601234, 'Bear');
+    getDb();
 });

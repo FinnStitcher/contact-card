@@ -19,3 +19,41 @@ export const initDb = async () => {
         }
     })
 };
+
+export const getDb = async () => {
+    console.log('get');
+
+    // connect to the database and create transaction
+    const contactDb = await openDB('contact_db', 1);
+    const tx = contactDb.transaction('contacts', 'readonly');
+
+    // open up the object store
+    const store = tx.objectStore('contacts');
+
+    // get all data
+    const request = store.getAll();
+
+    // confirm
+    const result = await request;
+    console.log('result.value', result);
+    return result;
+};
+
+export const postDb = async (name, email, phone, profile) => {
+    console.log('post');
+
+    const contactDb = await openDB('contact_db', 1);
+    const tx = contactDb.transaction('contacts', 'readwrite');
+    const store = tx.objectStore('contacts');
+
+    const request = store.add({
+        name: name,
+        email: email,
+        phone: phone,
+        profile: profile
+    });
+
+    const result = await request;
+    console.log('data saved', result);
+    return result;
+};
