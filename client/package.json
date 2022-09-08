@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack --mode development",
     "dev": "webpack-dev-server",
-    "start": "webpack --watch"
+    "start": "webpack --watch",
+    "heroku-prebuild": "npm install --dev"
   },
   "author": "",
   "license": "ISC",
@@ -23,5 +24,8 @@
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.1"
+  },
+  "engines": {
+    "node": "16.15.1"
   }
 }
