@@ -1,5 +1,6 @@
 import './form';
 import './submit';
+import './database';
 
 import '../css/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,4 +15,7 @@ window.addEventListener('load', function() {
     document.getElementById('logo').src = Logo;
     document.getElementById('bearThumbnail').src = Bear;
     document.getElementById('dogThumbnail').src = Dog;
+
+    // needs to go after the image declarations or the images dont load
+    initDb();
 });
