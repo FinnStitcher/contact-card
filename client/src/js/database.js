@@ -19,3 +19,64 @@ export const initDb = async () => {
         }
     })
 };
+
+export const getDb = async () => {
+    console.log('get');
+
+    // connect to the database and create transaction
+    const contactDb = await openDB('contact_db', 1);
+    const tx = contactDb.transaction('contacts', 'readonly');
+
+    // open up the object store
+    const store = tx.objectStore('contacts');
+
+    // get all data
+    const request = store.getAll();
+
+    // confirm
+    const result = await request;
+    return result;
+};
+
+export const postDb = async (name, email, phone, profile) => {
+    console.log('post');
+
+    const contactDb = await openDB('contact_db', 1);
+    const tx = contactDb.transaction('contacts', 'readwrite');
+    const store = tx.objectStore('contacts');
+
+    const request = store.add({
+        name: name,
+        email: email,
+        phone: phone,
+        profile: profile
+    });
+
+    const result = await request;
+    return result;
+};
+
+export const deleteDb = async (id) => {
+    console.log('delete', id);
+
+    const contactDb = await openDB('contact_db', 1);
+    const tx = contactDb.transaction('contacts', 'readwrite');
+    const store = tx.objectStore('contacts');
+
+    const request = store.delete(id);
+
+    const result = await request;
+    return result;
+}
+
+export const editDb = async (id, name, email, phone, profile) => {
+    console.log('update', id);
+
+    const contactDb = await openDB('contact_db', 1);
+    const tx = contactDb.transaction('contacts', 'readwrite');
+    const store = tx.objectStore('contacts');
+
+    const request = await store.put({id: id, name: name, email: email, phone: phone, profile: profile});
+    const result = await request;
+    return result;
+}
