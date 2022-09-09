@@ -10,7 +10,6 @@ export const fetchCards = async () => {
 
       // Loop through the data and create the contact card
       for (let data of result) {
-        console.log(data);
         let profilePic = data.profile;
         
         // Create cards
