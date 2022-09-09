@@ -17,6 +17,8 @@ const newContactButton = document.getElementById('new-contact');
 let submitBtnToUpdate = false;
 let profileId;
 
+// this file could REALLY, REALLY stand to be modularized more
+
 newContactButton.addEventListener('click', event => {
 	toggleForm();
 });
@@ -88,4 +90,11 @@ window.editCard = (e) => {
     form.style.display = "block";
 
     submitBtnToUpdate = true;
+};
+
+// registering the service worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js');
+    })
 };
