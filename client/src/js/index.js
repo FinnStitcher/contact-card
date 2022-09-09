@@ -1,6 +1,6 @@
 import {toggleForm, clearForm} from './form';
 import {fetchCards} from './cards';
-import { initDb, getDb, postDb } from './database';
+import { initDb, getDb, postDb, deleteDb } from './database';
 
 import '../css/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,6 +21,16 @@ window.addEventListener('load', function () {
 
 	fetchCards();
 });
+
+// attached to the window so any card can be deleted
+// event propagation!
+window.deleteCard = (e) => {
+    let id = parseInt(e.id);
+
+    deleteDb(id);
+
+    fetchCards();
+}
 
 // Form functionality
 const form = document.getElementById('formToggle');
