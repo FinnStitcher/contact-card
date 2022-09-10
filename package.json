@@ -9,8 +9,7 @@
     "server": "cd server nodemon server.js --ignore client",
     "client": "cd client && npm start",
     "build": "cd client && npm run build",
-    "install": "concurrently \"cd server && npm i\" \"cd client && npm i\"",
-    "heroku-prebuild": "npm install --dev"
+    "install": "concurrently \"cd server && npm i\" \"cd client && npm i\""
   },
   "repository": {
     "type": "git",
