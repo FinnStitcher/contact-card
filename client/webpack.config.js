@@ -1,8 +1,9 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 const {InjectManifest} = require('workbox-webpack-plugin');
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
@@ -39,7 +40,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './index.html',
-            title: 'Webpack Plugin'
+            title: 'Contact Cards'
         }),
         new InjectManifest({
             swSrc: './src/sw.js',
@@ -50,17 +51,28 @@ module.exports = {
 
             // runtime caching means we aren't stuffing everything into the cache on startup
             // instead, as the user interacts with the website (online), things will be cached as they come up
-            // runtimeCaching: [{
-            //     urlPattern: /\.(?:png|jpg|jpeg|svg|gif)/i,
-            //     // will attempt to get stuff from the cache before contacting the network
-            //     handler: 'CacheFirst',
-            //     options: {
-            //         cacheName: 'images',
-            //         expiration: {
-            //             maxEntries: 1
-            //         }
-            //     }
-            // }]
+        }),
+        new WebpackPwaManifest({
+            name: 'Contact Cards',
+            short_name: 'Contact Cards',
+            description: 'Keep track of contacts!',
+            background_color: '#7eb4e2',
+            theme_color: '#7eb4e2',
+            start_url: './',
+            publicPath: './',
+            icons: [
+                {
+                    src: path.resolve('src/images/icon-manifest.png'),
+                    sizes: [96, 128, 192, 256, 384, 512],
+                    destination: path.join('assets', 'icons')
+                },
+                {
+                    src: path.resolve('src/images/icon-manifest.png'),
+                    size: '1024x1024',
+                    destination: path.join('assets', 'icons'),
+                    purpose: 'maskable'
+                }
+            ]
         })
     ]
 };
